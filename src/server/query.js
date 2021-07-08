@@ -1,6 +1,6 @@
 import { Client } from 'pg'
 const createClient = () => new Client({
-  database: 'hackjobgames'
+  database: 'snackplease'
 })
 
  
