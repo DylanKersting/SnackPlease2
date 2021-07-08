@@ -1,6 +1,8 @@
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+
 -- CreateTable
 CREATE TABLE "active" (
-    "id" UUID NOT NULL,
+    "id" UUID NOT NULL DEFAULT uuid_generate_v4(),
     "username" TEXT NOT NULL,
     "lastused" TIMETZ(6) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
@@ -8,20 +10,8 @@ CREATE TABLE "active" (
 );
 
 -- CreateTable
-CREATE TABLE "devlog" (
-    "id" UUID NOT NULL,
-    "markdown" TEXT,
-    "created" TIMESTAMPTZ(6) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "imagePath" TEXT,
-    "title" TEXT,
-    "username" TEXT,
-
-    PRIMARY KEY ("id")
-);
-
--- CreateTable
 CREATE TABLE "users" (
-    "id" UUID NOT NULL,
+    "id" UUID NOT NULL DEFAULT uuid_generate_v4(),
     "username" TEXT NOT NULL,
     "hash" TEXT NOT NULL,
     "admin" BOOLEAN,

@@ -14,14 +14,13 @@ app.use(router)
 
 if (!process.env.DEVELOPMENT) {
   const config = {
-    key: fs.readFileSync(path.join(global.appRoot,'/ssl/server.key'), 'utf8'),
-    cert: fs.readFileSync(path.join(global.appRoot,'./ssl/server.crt'), 'utf8'),
-    ca: fs.readFileSync(path.join(global.appRoot,'./ssl/server.ca-bundle'), 'utf8')
+    key: fs.readFileSync('/etc/letsencrypt/live/snackplease.com/privkey.pem', 'utf8'),
+    cert: fs.readFileSync('/etc/letsencrypt/live/snackplease.com/fullchain.pem', 'utf8')
   }
 
   const unsafe = http.createServer(function(req, res) {  
     res.writeHead(302, {
-      'Location': 'https://hackjob.games' + req.url
+      'Location': 'https://snackplease.com' + req.url
     })
     res.end()
   });
