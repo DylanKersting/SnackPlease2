@@ -20,7 +20,7 @@ if (!process.env.DEVELOPMENT) {
 
   const unsafe = http.createServer(function(req, res) {  
     res.writeHead(302, {
-      'Location': 'https://hackjob.games' + req.url
+      'Location': 'https://snackplease.com' + req.url
     })
     res.end()
   });
