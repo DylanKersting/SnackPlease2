@@ -13,22 +13,6 @@ model active {
   lastused DateTime @default(now()) @db.Timetz(6)
 }
 
-model devlog {
-  id        String   @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
-  markdown  String?
-  created   DateTime @default(now()) @db.Timestamptz(6)
-  imagePath String?
-  title     String?
-  username  String?
-}
-
-model feedback {
-  id        String  @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
-  name      String
-  created   DateTime @default(now()) @db.Timestamptz(6)
-  content   String 
-}
-
 model users {
   id       String   @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
   username String   @unique
