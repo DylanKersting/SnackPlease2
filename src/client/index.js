@@ -1,11 +1,12 @@
 
-import './index.css'
+import './index.scss'
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { Landing } from './components/landing'
+
 
 import {
   BrowserRouter as Router,
+  Route,
   Switch,
 } from "react-router-dom";
 
@@ -18,13 +19,14 @@ const Browser = () => {
   })
 
   return (
-    <div>
+    <div className="fill">
       <Router>
-        <div>
-          <Landing/>
+        <TopNav />
+        <div className="content">
+          <Switch>
+            <Route key={'main'} path={`/`}><Template/></Route>
+          </Switch> 
         </div>
-        <Switch>
-        </Switch> 
       </Router>
     </div>
   )
