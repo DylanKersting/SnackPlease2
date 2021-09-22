@@ -1,8 +1,7 @@
-
 import './index.scss'
 import React from 'react'
 import ReactDOM from 'react-dom'
-
+import { Main } from './templates/Recipelist';
 
 import {
   BrowserRouter as Router,
@@ -18,18 +17,7 @@ const Browser = () => {
     nav: '',
   })
 
-  return (
-    <div className="fill">
-      <Router>
-        <TopNav />
-        <div className="content">
-          <Switch>
-            <Route key={'main'} path={`/`}><Template/></Route>
-          </Switch> 
-        </div>
-      </Router>
-    </div>
-  )
+  return (<Main/>)
 }
 
 ReactDOM.render(<Browser/>, document.getElementById('app'))
