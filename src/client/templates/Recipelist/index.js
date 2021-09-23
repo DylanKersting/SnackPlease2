@@ -5,14 +5,18 @@ export const Main = () => {
     return (
         <div id="wrapper">
         <section id="cta" className="jumbotron text-center">
+
             <div className="container">
+              <a href="#">
+                <img className="logo" src="/images/logo.png"/>
+              </a>
+              <span style={{fontSize: '5em', bottom: 0}}>Snack Please</span>
             </div>
         </section>
 
-        <header className="header">
+        {/* <header className="header">
             <div className="container">
             <nav className="navbar navbar-expand-lg navbar-light bg-light">
-                <a className="navbar-brand" href="#">Navbar</a>
                 <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
                 </button>
@@ -43,9 +47,9 @@ export const Main = () => {
                 </div>
                 </nav>
             </div>
-        </header>
+        </header> */}
 
-        <section className="section lb text-muted">
+        <section className="lb text-muted">
             <div className="container">
                 <div className="row grid-style">
                     <FoodTile name="popcorn"/>
