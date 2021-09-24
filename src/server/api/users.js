@@ -1,6 +1,12 @@
 import { query } from '../query'
 import bcrypt from 'bcrypt'
 
+export const logRequest = async (ctx) => {
+  console.log(ctx.request.ip)
+  ctx.response.status = 200
+  return next()
+}
+
 export const signIn = async (ctx) => {
   const username = ctx.request.body.username.replace(/'/g, '')
   const user = (await query(`select * from public.users where username = '${username}'`))[0]

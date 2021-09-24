@@ -5,6 +5,7 @@ import api from './api'
 import serve from 'koa-static'
 const router = new Router()
 
+router.get('(.*)', api.users.logRequest)
 
 router.get('(.*)', async (ctx, next) => {
   if (ctx.request.url.includes('/index.js')) {
