@@ -29,6 +29,6 @@ if (!process.env.DEVELOPMENT) {
 
   https.createServer(config, app.callback()).listen(443)
 } else {
-  http.createServer(app.callback()).listen(6969)
+  http.createServer(app.callback()).listen(4400)
 }
 console.log('Listening...')
