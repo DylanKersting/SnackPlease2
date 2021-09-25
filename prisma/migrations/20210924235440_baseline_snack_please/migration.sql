@@ -1,4 +1,4 @@
-CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+CREATE EXTENSION "uuid-ossp";
 
 -- CreateTable
 CREATE TABLE "active" (
@@ -15,6 +15,15 @@ CREATE TABLE "users" (
     "username" TEXT NOT NULL,
     "hash" TEXT NOT NULL,
     "admin" BOOLEAN,
+
+    PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "requests" (
+    "id" UUID NOT NULL DEFAULT uuid_generate_v4(),
+    "ip" TEXT NOT NULL,
+    "time" TIMETZ(6) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     PRIMARY KEY ("id")
 );

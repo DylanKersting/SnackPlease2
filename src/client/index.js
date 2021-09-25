@@ -94,6 +94,7 @@ const Browser = () => {
                 </div>
             </div>
         </footer>
+      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6950030315202688" crossOrigin="anonymous"></script>
   </div>
 
 

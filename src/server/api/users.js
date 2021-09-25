@@ -1,8 +1,9 @@
 import { query } from '../query'
 import bcrypt from 'bcrypt'
 
-export const logRequest = async (ctx) => {
-  console.log(ctx.request.ip)
+export const logRequest = async (ctx, next) => {
+  await query(`insert into public.requests (ip, path) values ('${ctx.request.ip}', '${ctx.request.url.replace(/'/g, '')}')`)
+  console.log('log request')
   ctx.response.status = 200
   return next()
 }

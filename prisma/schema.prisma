@@ -22,6 +22,7 @@ model users {
 
 model requests {
   id       String   @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
-  ip       Stringnpm 
+  ip       String
+  path     String   @default("/")
   time     DateTime @default(now()) @db.Timetz(6)
 }
