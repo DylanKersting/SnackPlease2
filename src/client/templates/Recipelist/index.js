@@ -16,9 +16,6 @@ export const Main = () => {
                 
                 <hr className="invis"/>
 
-{/* Put ad here*/}
-
-                <hr className="invis3"/>
 
                 <div className="row grid-style">
 
