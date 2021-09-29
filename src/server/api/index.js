@@ -1,8 +1,3 @@
-import * as users from './users'
-import * as components from './components'
-
-
-export default {
-  users,
-  components
-}
+export * as users from './users'
+export * as components from './components'
+export * as recipes from './recipes'

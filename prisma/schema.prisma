@@ -26,3 +26,11 @@ model requests {
   path     String   @default("/")
   time     DateTime @default(now()) @db.Timetz(6)
 }
+
+model recipes {
+  id       String   @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  author   String
+  title    String
+  markdown String
+  created  DateTime @default(now()) @db.Timetz(6)
+}

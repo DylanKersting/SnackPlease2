@@ -3,33 +3,37 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { Main } from './templates/Recipelist';
 import { Recipe } from './templates/Recipelist/recipe';
+import { Create } from './components/createRecipe';
 
 import {
   BrowserRouter as Router,
   Route,
   Switch,
+  useLocation
 } from "react-router-dom";
 
 const styles = {
 }
 
 const Browser = () => {
+  const location = useLocation()
+  
   const [state, setState] = React.useState({
     nav: '',
+    page: location.search('page') || 1
   })
 
   return (
   <div>
-           <section id="cta" className="jumbotron text-center">
-
-<div className="container">
-  <span style={{fontSize: '5em', bottom: 0}}>Snack</span>
-    <a href="/">
-      <img className="logo" src="/images/logo.png"/>
-    </a>
-  <span style={{fontSize: '5em', bottom: 0}}>Please</span>
-</div>
-</section>
+      <section id="cta" className="jumbotron text-center">
+        <div className="container">
+          <span style={{fontSize: '5em', bottom: 0}}>Snack</span>
+            <a href="/">
+              <img className="logo" src="/images/logo.png"/>
+            </a>
+          <span style={{fontSize: '5em', bottom: 0}}>Please</span>
+        </div>
+      </section>
 
 {/* <header className="header">
 <div className="container">
@@ -68,8 +72,9 @@ const Browser = () => {
 
   <Router>
     <Switch>
+      <Route key="create" path="/create"><Create/></Route>
       <Route key="recipe" path="/:recipe"><Recipe/></Route>
-      <Route key="main" path="/"><Main/> </Route>
+      <Route key="main" path="/"><Main page={state.page}/> </Route>
     </Switch>
   </Router>
 
@@ -95,11 +100,12 @@ const Browser = () => {
             </div>
         </footer>
   </div>
-
-
-  
   )
 }
 
 ReactDOM.render(<Browser/>, document.getElementById('app'))
+
+
+
+
 

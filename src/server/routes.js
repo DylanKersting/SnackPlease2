@@ -1,9 +1,14 @@
 import Router from 'koa-router'
 import body from 'koa-body'
 import path from 'path'
-import api from './api'
+import * as api from './api'
 import serve from 'koa-static'
 const router = new Router()
+
+router.get('/recipes', api.recipes.get)
+router.get('/recipes/:page', api.recipes.getPage)
+router.post('/recipes', api.recipes.create)
+
 
 router.get('(.*)', api.users.logRequest)
 
