@@ -5,9 +5,10 @@ import * as api from './api'
 import serve from 'koa-static'
 const router = new Router()
 
-router.get('/recipes', api.recipes.get)
-router.get('/recipes/:page', api.recipes.getPage)
-router.post('/recipes', api.recipes.create)
+router.get('/api/recipes', api.recipes.get)
+router.get('/api/recipes/:page', api.recipes.getPage)
+router.get('/api/recipe/:id', api.recipes.getRecipe)
+router.post('/api/recipes', api.recipes.create)
 
 
 router.get('(.*)', api.users.logRequest)

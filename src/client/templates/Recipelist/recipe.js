@@ -1,8 +1,11 @@
 import React from 'react'
 import axios from 'axios/dist/axios'
 import marked from 'marked'
+import { useParams } from 'react-router'
 
-export const Recipe = (params) => {
+export const Recipe = () => {
+    const params = useParams()
+
     const [state, setState] = React.useState({
         markdown: '',
         pull: true,
@@ -10,13 +13,12 @@ export const Recipe = (params) => {
     })
 
     if (state.pull) {
-        axios.get(`/recipes/${state.id}`).then(res => {
-            setState({ ...state, markdown: res.data, pull: false })
+        axios.get(`/api/recipe/${state.id}`).then(res => {
+            setState({ ...state, ...res.data, pull: false })
         })
     }
 
     return (
-        <body>
 
         <section >
             <div className="container">
@@ -25,12 +27,10 @@ export const Recipe = (params) => {
                         <div className="page-wrapper">
                             <div className="blog-title-area">
 
-                                <h3>Quick n Easy Homemade Pizza Recipe</h3>
+                                <h3>{state.title}</h3>
                             </div>{/* end title */}
 
-                            <div className="blog-content">  
-                                {marked(state.markdown)}
-                            </div>{/* end content */}
+                            <div className="blog-content" dangerouslySetInnerHTML={{ __html: marked(state.markdown) }} />
 
                             <div className="blog-title-area">
                                 <div className="tag-cloud-single">
@@ -72,7 +72,6 @@ export const Recipe = (params) => {
                 </div>{/* end row */}
             </div>{/* end container */}
         </section>
-    </body>
     )
 }
 

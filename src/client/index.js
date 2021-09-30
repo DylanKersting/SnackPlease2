@@ -4,23 +4,21 @@ import ReactDOM from 'react-dom'
 import { Main } from './templates/Recipelist';
 import { Recipe } from './templates/Recipelist/recipe';
 import { Create } from './components/createRecipe';
+import { useLocation } from 'react-router';
 
 import {
   BrowserRouter as Router,
   Route,
-  Switch,
-  useLocation
+  Switch
 } from "react-router-dom";
 
 const styles = {
 }
 
 const Browser = () => {
-  const location = useLocation()
   
   const [state, setState] = React.useState({
-    nav: '',
-    page: location.search('page') || 1
+    nav: ''
   })
 
   return (
@@ -73,8 +71,8 @@ const Browser = () => {
   <Router>
     <Switch>
       <Route key="create" path="/create"><Create/></Route>
-      <Route key="recipe" path="/:recipe"><Recipe/></Route>
-      <Route key="main" path="/"><Main page={state.page}/> </Route>
+      <Route key="recipe" path="/recipe/:id"><Recipe/></Route>
+      <Route key="main" path="/:page?"><Main/> </Route>
     </Switch>
   </Router>
 
