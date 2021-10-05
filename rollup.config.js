@@ -19,7 +19,8 @@ const plugins = [
   }),
   copy({
     targets: [
-      { src: 'src/client/index.html', dest: 'dist' }
+      { src: 'src/client/index.html', dest: 'dist' },
+      { src: 'src/client/extensions/*', dest: 'dist/extensions' }
     ]
   }),
   json(),

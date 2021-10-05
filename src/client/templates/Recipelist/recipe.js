@@ -18,6 +18,7 @@ export const Recipe = () => {
         })
     }
 
+
     return (
 
         <section >
@@ -43,8 +44,15 @@ export const Recipe = () => {
 
                                 <div className="post-sharing">
                                     <ul className="list-inline">
-                                        <li><a href="#" className="fb-button btn btn-primary"><i className="fa fa-facebook"></i> <span className="down-mobile">Share on Facebook</span></a></li>
-                                        <li><a href="#" className="tw-button btn btn-primary"><i className="fa fa-twitter"></i> <span className="down-mobile">Tweet on Twitter</span></a></li>
+                                        <div id="fb-root"></div>
+                                            <div className="fb-share-button" 
+                                            data-href="https://snackplease.com" 
+                                            data-layout="button_count">
+                                            </div>
+                                          <script type="text/javscript" id="facebookScript" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.0"/>
+                                          <a class="twitter-share-button" href="https://twitter.com/intent/tweet" data-url={window.location.href} data-size="large" data-text="Check out this tasty snack!">
+                                            Tweet This
+                                          </a>
                                     </ul>
                                 </div>{/* end post-sharing */}
                             </div>{/* end title */}
