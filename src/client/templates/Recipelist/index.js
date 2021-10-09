@@ -7,7 +7,7 @@ export const Main = () => {
     const [state, setState] = React.useState({
         recipes: [],
         pull: true,
-        page: useParams().page || 1
+        page: parseInt(useParams().page) || 1
     })
 
     const updateSearch = (event) => {
@@ -69,7 +69,24 @@ export const Main = () => {
                 
                 <hr className="invis"/>
             </div>      
-        </section>  
+        </section>
+        <nav className="d-flex justify-content-around">
+          <ul className="pagination">
+            <li className="page-item">
+              <a className="page-link" href={`/${state.page === 1 ? 1 : state.page - 1}`} aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+              </a>
+            </li>
+            <li className="page-item"><a className="page-link" href={`/${state.page === 1 ? 1 : state.page - 1}`}>{state.page === 1 ? 1 : state.page - 1}</a></li>
+            <li className="page-item"><a className="page-link" href={`/${state.page === 1 ? 2 : state.page}`}>{state.page === 1 ? 2 : state.page}</a></li>
+            <li className="page-item"><a className="page-link" href={`/${state.page === 1 ? 3 : state.page + 1}`}>{state.page === 1 ? 3 : state.page + 1}</a></li>
+            <li className="page-item">
+              <a className="page-link" href={`/${state.page + 1}`} aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
     </div>
     )
 }

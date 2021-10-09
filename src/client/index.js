@@ -25,11 +25,11 @@ const Browser = () => {
   <div>
       <section id="cta" className="jumbotron text-center">
         <div className="container">
-          <span style={{fontSize: '5em', bottom: 0}}>Snack</span>
+          <span style={{fontSize: '5em', bottom: 0}} className="fancyText">Snack</span>
             <a href="/">
               <img className="logo" src="/images/logo.png"/>
             </a>
-          <span style={{fontSize: '5em', bottom: 0}}>Please</span>
+          <span style={{fontSize: '5em', bottom: 0}} className="fancyText">Please</span>
         </div>
       </section>
 
@@ -38,7 +38,7 @@ const Browser = () => {
 
   <Router>
     <Switch>
-      <Route key="create" path="/create"><Create/></Route>
+      <Route key="create" path="/create/:id?"><Create/></Route>
       <Route key="recipe" path="/recipe/:id"><Recipe/></Route>
       <Route key="main" path="/:page?"><Main/> </Route>
     </Switch>
