@@ -7,26 +7,35 @@ import v4 from 'uuid-browser/v4'
 import marked from 'marked'
 
 import {
-  useHistory
+  useHistory,
+  useParams
 } from "react-router-dom";
 
-export const Create = (params) => {
+export const Create = () => {
   const history = useHistory()
-
+  const params = useParams()
+  console.log(params)
   const [state, setState] = React.useState({
     pullData: true,
     markdown: '',
     title: '',
-    id: v4(),
+    id: params.id || v4(),
     userid: getCookie('user')
   })
-  console.log(state.userid)
+
+  if (state.pullData && params.id) {
+    axios.get(`/api/recipe/${params.id}`).then(res => {
+      setState({ ...state, ...res.data, pullData: false })
+    })
+  }
 
   const save = () => {
     axios.post('/api/recipes', state).then(res => {
-      history.push('/')
+      history.push('/recipe/' + state.id)
     })
   }
+
+  
 
   const updateMarkdown = (event) => {
     console.log('Update Markdown: ', event.target.value)
@@ -37,12 +46,12 @@ export const Create = (params) => {
     setState({ ...state, title: event.target.value })
   }
 
-  const uploadFile = (blob) => {
+  const uploadFile = (blob, imageName) => {
     let data = new FormData()
     data.append('file', blob, 'image.png')
     data.append('id', state.id)
     data.append('token', state.userid)
-
+    data.append('imageName', imageName)
 
 
     axios.put('/api/recipes/image/', data, {
@@ -52,7 +61,9 @@ export const Create = (params) => {
         'Content-Type': `multipart/form-data; boundary=${data._boundary}`,
       }
     }).then(res => {
-      setState({ ...state, markdown: state.markdown += `![](${window.location.protocol}//${window.location.host}${res.data})` }) 
+      if (!imageName) {
+        setState({ ...state, markdown: state.markdown += `![](${window.location.protocol}//${window.location.host}${res.data})` }) 
+      }
     })
   }
 
@@ -67,12 +78,13 @@ export const Create = (params) => {
     }
   }
 
-  const handleUpload = (event) => {
-    const input = document.getElementById('myFile')
+  const handleUpload = (inputId, imageName) => {
+    const input = document.getElementById(inputId)
     console.log(input.files)
-    uploadFile(document.getElementById('myFile').files[0])
+    uploadFile(document.getElementById(inputId).files[0], imageName)
     input.value = null
   }
+
 
   return (
       <div>
@@ -81,9 +93,11 @@ export const Create = (params) => {
           value={state.title}
           onChange={updateTitle}
           />
+          <button onClick={() => {document.getElementById('homePageImage').click()}}>Upload Home Page Image</button>
           <button onClick={() => {document.getElementById('myFile').click()}}>Upload Image</button>
         </div>
-          <input onChange={handleUpload} type="file" id="myFile" hidden name="filename"/>
+          <input onChange={() => handleUpload('homePageImage', 'homePage')} type="file" id="homePageImage" hidden name="filename"/> 
+          <input onChange={() => handleUpload('myFile')} type="file" id="myFile" hidden name="filename"/>
           <textarea rows={50} cols={70} onPaste={handlePaste}  onChange={updateMarkdown} value={state.markdown} />
           <button onClick={save}>
             Post
