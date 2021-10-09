@@ -43,11 +43,18 @@ export const getRecipe = async (ctx) => {
 
 export const create = async (ctx) => {
     if (isAdmin(ctx.request.body.userid)) {
+      const exists = (await query(`select * from public.recipes where id = '${cleanse(ctx.request.body.id)}'`))
+      if (exists.length > 0) {
+        await query(`update public.recipes
+                      set title = '${cleanse(ctx.request.body.title)}',
+                      markdown = '${cleanse(ctx.request.body.markdown)}'`)
+      } else {
         await query(`insert into public.recipes(id, author, title, markdown)
-                     values ('${cleanse(ctx.request.body.id)}','Lauren Rydh', '${cleanse(ctx.request.body.title)}', '${cleanse(ctx.request.body.markdown)}')`)
-        ctx.response.status = 200
+        values ('${cleanse(ctx.request.body.id)}','Lauren Rydh', '${cleanse(ctx.request.body.title)}', '${cleanse(ctx.request.body.markdown)}')`)
+      }
+      ctx.response.status = 200
     } else {
-        ctx.response.status = 401
+      ctx.response.status = 401
     }
 }
 
@@ -59,7 +66,7 @@ export const image = async (ctx) => {
   if (!fs.existsSync('./dist/images/recipes/' + ctx.request.body.id)) {
     fs.mkdirSync('./dist/images/recipes/' + ctx.request.body.id)
   }
-  const path = './dist/images/recipes/' + ctx.request.body.id + '/' + v4() + '.png'
+  const path = './dist/images/recipes/' + ctx.request.body.id + '/' + (ctx.request.body.imageName || v4()) + '.png'
   require("fs").writeFileSync(path, fs.readFileSync(ctx.request.files.file.path))
   ctx.body = path.replace('./dist', '')
   ctx.response.status = 200
