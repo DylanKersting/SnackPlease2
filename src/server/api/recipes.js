@@ -1,8 +1,7 @@
 import { query } from "../query"
 import fs from 'fs'
 import v4 from "uuid-browser/v4"
-import { isAdmin } from '../helpers'
-
+import { cleanse } from '../helpers'
 
 
 export const get = async (ctx) => {
@@ -38,27 +37,19 @@ export const getRecipe = async (ctx) => {
 }
 
 export const create = async (ctx) => {
-    if (isAdmin(ctx.request.body.userid)) {
-      const exists = (await query(`select * from public.recipes where id = '${cleanse(ctx.request.body.id)}'`))
-      if (exists.length > 0) {
-        await query(`update public.recipes
-                      set title = '${cleanse(ctx.request.body.title)}',
-                      markdown = '${cleanse(ctx.request.body.markdown)}'`)
-      } else {
-        await query(`insert into public.recipes(id, author, title, markdown)
-        values ('${cleanse(ctx.request.body.id)}','Lauren Rydh', '${cleanse(ctx.request.body.title)}', '${cleanse(ctx.request.body.markdown)}')`)
-      }
-      ctx.response.status = 200
+    const exists = (await query(`select * from public.recipes where id = '${cleanse(ctx.request.body.id)}'`))
+    if (exists.length > 0) {
+      await query(`update public.recipes
+                    set title = '${cleanse(ctx.request.body.title)}',
+                    markdown = '${cleanse(ctx.request.body.markdown)}'`)
     } else {
-      ctx.response.status = 401
+      await query(`insert into public.recipes(id, author, title, markdown)
+      values ('${cleanse(ctx.request.body.id)}','Lauren Rydh', '${cleanse(ctx.request.body.title)}', '${cleanse(ctx.request.body.markdown)}')`)
     }
+    ctx.response.status = 200
 }
 
 export const image = async (ctx) => {
-  if (!await(isAdmin(ctx.request.body.token))) {
-    ctx.response.status = 401
-    return
-  }
   if (!fs.existsSync('./dist/images/recipes/' + ctx.request.body.id)) {
     fs.mkdirSync('./dist/images/recipes/' + ctx.request.body.id)
   }

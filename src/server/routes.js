@@ -3,14 +3,20 @@ import body from 'koa-body'
 import path from 'path'
 import * as api from './api'
 import serve from 'koa-static'
+import { isAdmin } from './helpers'
 const router = new Router()
+
 
 router.get('/api/recipes', api.recipes.get)
 router.get('/api/recipes/:page', api.recipes.getPage)
 router.get('/api/recipe/:id', api.recipes.getRecipe)
-router.post('/api/recipes', api.recipes.create)
-router.put('/api/recipes/image', api.recipes.image)
 router.get('/api/admin/requests', api.admin.requests)
+
+router.put('(.*)', isAdmin)
+router.post('(.*)', isAdmin)
+
+router.put('/api/recipes/image', api.recipes.image)
+router.post('/api/recipes', api.recipes.create)
 
 
 router.get('(.*)', api.users.logRequest)
