@@ -10,6 +10,7 @@ router.get('/api/recipes/:page', api.recipes.getPage)
 router.get('/api/recipe/:id', api.recipes.getRecipe)
 router.post('/api/recipes', api.recipes.create)
 router.put('/api/recipes/image', api.recipes.image)
+router.get('/api/admin/requests', api.admin.requests)
 
 
 router.get('(.*)', api.users.logRequest)

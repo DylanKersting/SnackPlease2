@@ -4,7 +4,9 @@ import ReactDOM from 'react-dom'
 import { Main } from './templates/Recipelist';
 import { Recipe } from './templates/Recipelist/recipe';
 import { Create } from './components/createRecipe';
+import { Admin } from './components/admin'
 import { useLocation } from 'react-router';
+
 
 import {
   BrowserRouter as Router,
@@ -38,6 +40,7 @@ const Browser = () => {
 
   <Router>
     <Switch>
+      <Route key="admin" path="/ghiowertghdslf"><Admin/></Route>
       <Route key="create" path="/create/:id?"><Create/></Route>
       <Route key="recipe" path="/recipe/:id"><Recipe/></Route>
       <Route key="main" path="/:page?"><Main/> </Route>

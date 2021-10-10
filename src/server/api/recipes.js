@@ -1,13 +1,9 @@
 import { query } from "../query"
 import fs from 'fs'
 import v4 from "uuid-browser/v4"
+import { isAdmin } from '../helpers'
 
-const cleanse = (text) => text.replace(/'/g, '')
 
-
-const isAdmin = async(token) => {
-  return (await query(`select * from public.users where id = '${cleanse(token)}'`)).length > 0
-}
 
 export const get = async (ctx) => {
     ctx.body =  await query('select * from public.recipes')
