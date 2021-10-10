@@ -24,7 +24,7 @@ model requests {
   id       String   @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
   ip       String
   path     String   @default("/")
-  time     DateTime @default(now()) @db.Timetz(6)
+  time     DateTime @default(now()) @db.Timestamp()
 }
 
 model recipes {
@@ -32,5 +32,5 @@ model recipes {
   author   String
   title    String
   markdown String
-  created  DateTime @default(now()) @db.Timetz(6)
+  created  DateTime @default(now()) @db.Timestamp()
 }
