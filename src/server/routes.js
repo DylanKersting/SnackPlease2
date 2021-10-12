@@ -17,7 +17,7 @@ router.post('(.*)', isAdmin)
 router.put('/api/recipes/image', api.recipes.image)
 router.post('/api/recipes', api.recipes.create)
 router.get('/api/admin/requests', api.admin.requests)
-
+router.get('/api/admin/ips', api.admin.uniqueIps)
 
 router.get('(.*)', api.users.logRequest)
 

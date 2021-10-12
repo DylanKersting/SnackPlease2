@@ -6,16 +6,18 @@ import { getCookie } from '../../util'
 export const Admin = () => {
   const [state, setState] = React.useState({
     pullData: true,
-    requests: []
+    requests: [],
+    ips: []
   })
   if (state.pullData) {
-    axios.get(`/api/admin/requests`).then(res => {
-      setState({ ...state, requests: res.data, pullData: false })
+    Promise.all([axios.get('/api/admin/requests'), axios.get('/api/admin/ips')]).then(([req, ips]) => {
+      setState({ ...state, requests: req.data, ips: ips.data, pullData: false })
     })
   }
 
   return (
       <div>
+        <h1>Raw Requests</h1>
         <table className="table">
           <thead>
             <tr>
@@ -28,6 +30,25 @@ export const Admin = () => {
               <tr key={ix}> 
                 <th scope="row">{request.cnt}</th>
                 <td>{request.day}</td>
+              </tr>
+            )}
+          </tbody>
+        </table>
+        <h1>Unique Ips</h1>
+        <table className="table">
+          <thead>
+            <tr>
+              <th scope="col">Count</th>
+              <th scope="col">Day</th>
+              <th scope="col">Ip</th>
+            </tr>
+          </thead>
+          <tbody>
+            {state.ips.map((ip, ix) =>
+              <tr key={ix}> 
+                <th scope="row">{ip.cnt}</th>
+                <td>{ip.day}</td>
+                <td>{ip.ip}</td>
               </tr>
             )}
           </tbody>
