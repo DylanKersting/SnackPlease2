@@ -12,7 +12,7 @@ export const FoodTile = ({name, description, posted, author, id}) => {
                     </a>
                 </div>
                 <div className="blog-meta big-meta">
-                    <h4><a className="foodName" href={'/recipe/' + id} title="">{name || "Popcorn"}</a></h4>
+                    <h4><a className="foodName" href={'/recipe/' + id} title="" style={{ fontFamily: 'Justforfun', fontSize: '1.75em' }}>{name || "Popcorn"}</a></h4>
                     <small><p href="#" title="">by {author || "Lauren"}</p></small>
                 </div>
             </div>
