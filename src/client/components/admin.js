@@ -41,7 +41,6 @@ export const Admin = () => {
             <tr>
               <th scope="col">Count</th>
               <th scope="col">Day</th>
-              <th scope="col">Ip</th>
             </tr>
           </thead>
           <tbody>
@@ -49,7 +48,6 @@ export const Admin = () => {
               <tr key={ix}> 
                 <th scope="row">{ip.cnt}</th>
                 <td>{ip.day}</td>
-                <td>{ip.ip}</td>
               </tr>
             )}
           </tbody>
