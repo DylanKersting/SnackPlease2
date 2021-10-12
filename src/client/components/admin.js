@@ -7,11 +7,12 @@ export const Admin = () => {
   const [state, setState] = React.useState({
     pullData: true,
     requests: [],
-    ips: []
+    ips: [],
+    recipes: []
   })
   if (state.pullData) {
-    Promise.all([axios.get('/api/admin/requests'), axios.get('/api/admin/ips')]).then(([req, ips]) => {
-      setState({ ...state, requests: req.data, ips: ips.data, pullData: false })
+    Promise.all([axios.get('/api/admin/requests'), axios.get('/api/admin/ips'),  axios.get('/api/admin/topRecipes')]).then(([req, ips, resp]) => {
+      setState({ ...state, requests: req.data, ips: ips.data, recipes: resp.data, pullData: false })
     })
   }
 
@@ -49,6 +50,27 @@ export const Admin = () => {
                 <th scope="row">{ip.cnt}</th>
                 <td>{ip.day}</td>
                 <td>{ip.ip}</td>
+              </tr>
+            )}
+          </tbody>
+        </table>
+        <h1>Top Recipes</h1>
+        <table className="table">
+          <thead>
+            <tr>
+              <th scope="col">Count</th>
+              <th scope="col">Day</th>
+              <th scope="col">Path</th>
+              <th scope="col">Name</th>
+            </tr>
+          </thead>
+          <tbody>
+            {state.recipes.map((recipe, ix) =>
+              <tr key={ix}> 
+                <th scope="row">{recipe.cnt}</th>
+                <td>{recipe.day}</td>
+                <td><a href={recipe.path}>{recipe.path}</a></td>
+                <td>{recipe.name}</td>
               </tr>
             )}
           </tbody>
