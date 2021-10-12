@@ -6,7 +6,7 @@ export const FoodTile = ({name, description, posted, author, id}) => {
         <div className="col-lg-3 col-md-6 col-sm-12 col-xs-12">
             <div className="blog-box">
                 <div className="post-media">
-                    <a href="food-single.html" title="">
+                    <a href={'/recipe/' + id} title="">
                         <img src={`/images/recipes/${id}/homePage.png`} alt="" className="img-fluid"/>
                         <div className="hovereffect"></div>
                     </a>
