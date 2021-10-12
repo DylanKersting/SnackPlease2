@@ -50,7 +50,7 @@ export const Create = () => {
     let data = new FormData()
     data.append('file', blob, 'image.png')
     data.append('id', state.id)
-    data.append('imageName', imageName)
+    if (imageName) data.append('imageName', imageName)
 
 
     axios.put('/api/recipes/image/', data, {
