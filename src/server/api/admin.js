@@ -9,9 +9,9 @@ export const requests = async (ctx) => {
 }
 
 export const uniqueIps = async (ctx) => {
-  ctx.body = await query(`SELECT count(*) as cnt, ip, time::date::text as day from public.requests
-  group by ip, day order by day desc
-  limit 7`)
+  ctx.body = await query(`SELECT count(*) as cnt, s.day from (SELECT ip, time::date::text as day  from public.requests
+    group by ip, day order by day desc
+    limit 7) s group by s.day order by s.day desc`)
   ctx.response.status = 200
 }
 
