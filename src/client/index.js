@@ -1,8 +1,8 @@
 import './index.scss'
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { Main } from './templates/Recipelist';
-import { Recipe } from './templates/Recipelist/recipe';
+import { Main } from './components/main';
+import { Recipe } from './components/recipe';
 import { Create } from './components/createRecipe';
 import { Admin } from './components/admin'
 import { useLocation } from 'react-router';
