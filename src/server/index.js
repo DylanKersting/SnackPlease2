@@ -12,6 +12,8 @@ const app = new Koa()
 app.use(koaBodyFile);
 app.use(router)
 
+console.log(process.cwd())
+
 if (!process.env.DEVELOPMENT) {
   const config = {
     key: fs.readFileSync('/etc/letsencrypt/live/snackplease.com/privkey.pem', 'utf8'),
