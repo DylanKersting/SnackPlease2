@@ -10,13 +10,13 @@ const router = new Router()
 router.get('/api/recipes', api.recipes.get)
 router.get('/api/recipes/:page', api.recipes.getPage)
 router.get('/api/recipe/:id', api.recipes.getRecipe)
-router.get('/api/admin/requests', api.admin.requests)
 
 router.put('(.*)', isAdmin)
 router.post('(.*)', isAdmin)
 
 router.put('/api/recipes/image', api.recipes.image)
 router.post('/api/recipes', api.recipes.create)
+router.get('/api/admin/requests', api.admin.requests)
 
 
 router.get('(.*)', api.users.logRequest)
