@@ -27,7 +27,7 @@ router.get('(.*)', async (ctx, next) => {
     ctx.request.url = '/index.js'
   } else if (ctx.request.url.includes('/index.map.js')) {
     ctx.request.url = '/index.map.js'
-  } else if (ctx.request.url.includes('lib') || ctx.request.url.includes('images')) {
+  } else if (ctx.request.url.includes('lib') || ctx.request.url.includes('images') || ctx.request.url.includes('resources')) {
   } else if(ctx.request.url !== '/index.js' && ctx.request.url !== '/index.js.map') {
     ctx.request.url = '/'
   } 
