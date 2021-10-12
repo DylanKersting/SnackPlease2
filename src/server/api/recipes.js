@@ -51,8 +51,8 @@ export const create = async (ctx) => {
 }
 
 export const image = async (ctx) => {
-  if (!fs.existsSync('./dist/images/recipes', ctx.request.body.id)) {
-    fs.mkdirSync('./dist/images/recipes', ctx.request.body.id)
+  if (!fs.existsSync('./dist/images/recipes/' + ctx.request.body.id)) {
+    fs.mkdirSync('./dist/images/recipes/' + ctx.request.body.id)
   }
   const fPath = './dist/images/recipes/' + ctx.request.body.id + '/' + (ctx.request.body.imageName || v4()) + '.png'
   require("fs").writeFileSync(fPath, fs.readFileSync(ctx.request.files.file.path))
