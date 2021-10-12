@@ -1,5 +1,6 @@
 import { query } from "../query"
 import fs from 'fs'
+import path from 'path'
 import v4 from "uuid-browser/v4"
 import { cleanse } from '../helpers'
 
@@ -50,11 +51,11 @@ export const create = async (ctx) => {
 }
 
 export const image = async (ctx) => {
-  if (!fs.existsSync('./dist/images/recipes/' + ctx.request.body.id)) {
-    fs.mkdirSync('./dist/images/recipes/' + ctx.request.body.id)
+  if (!fs.existsSync(path.join('./dist/images/recipes', ctx.request.body.id))) {
+    fs.mkdirSync(path.join('./dist/images/recipes', ctx.request.body.id))
   }
-  const path = './dist/images/recipes/' + ctx.request.body.id + '/' + (ctx.request.body.imageName || v4()) + '.png'
-  require("fs").writeFileSync(path, fs.readFileSync(ctx.request.files.file.path))
-  ctx.body = path.replace('./dist', '')
+  const fPath = './dist/images/recipes/' + ctx.request.body.id + '/' + (ctx.request.body.imageName || v4()) + '.png'
+  require("fs").writeFileSync(path.resolve(fPath), fs.readFileSync(ctx.request.files.file.path))
+  ctx.body = fPath.replace('./dist', '')
   ctx.response.status = 200
 }
