@@ -19,6 +19,7 @@ export const Create = () => {
     pullData: true,
     markdown: '',
     title: '',
+    author: '',
     id: params.id || v4(),
     userid: getCookie('user')
   })
@@ -44,6 +45,10 @@ export const Create = () => {
 
   const updateTitle = (event) => {
     setState({ ...state, title: event.target.value })
+  }
+
+  const updateAuthor = (event) => {
+    setState({ ...state, author: event.target.value })
   }
 
   const uploadFile = (blob, imageName) => {
@@ -88,10 +93,21 @@ export const Create = () => {
   return (
       <div>
         <div>
-          <input
-          value={state.title}
-          onChange={updateTitle}
-          />
+          <div>
+            <span>Title: </span>
+            <input
+            value={state.title}
+            onChange={updateTitle}
+            />
+          </div>
+          <div>
+            <span>Author: </span>
+            <input
+            value={state.author}
+            onChange={updateAuthor}
+            />
+
+          </div>
           <button onClick={() => {document.getElementById('homePageImage').click()}}>Upload Home Page Image</button>
           <button onClick={() => {document.getElementById('myFile').click()}}>Upload Image</button>
         </div>
