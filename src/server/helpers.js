@@ -1,6 +1,6 @@
 import { query } from "./query"
 
-export const cleanse = (text) => text.replace(/'/g, '')
+export const cleanse = (text) => text.replace(/'/g, '\'\'')
 
 export const isAdmin = async (ctx, next) => {
   try {
