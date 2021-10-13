@@ -113,7 +113,7 @@ export const Create = () => {
         </div>
           <input onChange={() => handleUpload('homePageImage', 'homePage')} type="file" id="homePageImage" hidden name="filename"/> 
           <input onChange={() => handleUpload('myFile')} type="file" id="myFile" hidden name="filename"/>
-          <textarea rows={50} cols={70} onPaste={handlePaste}  onChange={updateMarkdown} value={state.markdown} />
+          <textarea style={{ width: '100%' }} rows={50} cols={70} onPaste={handlePaste}  onChange={updateMarkdown} value={state.markdown} />
           <button onClick={save}>
             Post
           </button>
