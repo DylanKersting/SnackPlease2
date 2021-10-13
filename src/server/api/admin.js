@@ -15,9 +15,9 @@ export const uniqueIps = async (ctx) => {
 }
 
 export const topRecipes = async (ctx) => {
-  const top = await query(`SELECT count(*) as cnt, time::date::text as day, path from public.requests
-  where path like '%/recipe/%-%-%-%'
-  group by day, path order by day desc
+  const top = await query(`SELECT count(*) as cnt, path from public.requests
+  where path like '%/recipe/%-%-%-%' and time >= CURRENT_DATE - 7
+  group by path order by cnt desc
   limit 7`)
   for(const recipe of top) {
     const id = recipe.path.replace('/recipe/', '')

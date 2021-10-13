@@ -57,7 +57,6 @@ export const Admin = () => {
           <thead>
             <tr>
               <th scope="col">Count</th>
-              <th scope="col">Day</th>
               <th scope="col">Path</th>
               <th scope="col">Name</th>
             </tr>
@@ -66,7 +65,6 @@ export const Admin = () => {
             {state.recipes.map((recipe, ix) =>
               <tr key={ix}> 
                 <th scope="row">{recipe.cnt}</th>
-                <td>{recipe.day}</td>
                 <td><a href={recipe.path}>{recipe.path}</a></td>
                 <td>{recipe.name}</td>
               </tr>
