@@ -57,16 +57,6 @@ export const Recipe = () => {
                                 </div>{/* end post-sharing */}
                             </div>{/* end title */}
 
-                            <div className="row">
-                                <div className="col-lg-12">
-                                    <div className="banner-spot clearfix">
-                                        <div className="banner-img">
-                                            <img src="upload/banner_06.jpg" alt="" className="img-fluid"/>
-                                        </div>{/* end banner-img */}
-                                    </div>{/* end banner */}
-                                </div>{/* end col */}
-                            </div>{/* end row */}
-
                             <hr className="invis1"/>         
                         </div>{/* end page-wrapper */}
                     </div>{/* end col */}
